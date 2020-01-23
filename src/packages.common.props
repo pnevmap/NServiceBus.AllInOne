@@ -1,0 +1,7 @@
+<Project>
+  <Import Project="common.props"/>
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>false</IncludeSymbols>
+  </PropertyGroup>
+</Project>

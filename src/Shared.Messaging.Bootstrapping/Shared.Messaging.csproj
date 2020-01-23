@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="../packages.common.props" />
+
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+        <PackageReference Include="NServiceBus.MSDependencyInjection" Version="0.1.4" />
+        <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="2.2.0" />
+        <PackageReference Include="NServiceBus.Persistence.Sql" Version="4.5.1" />
+        <PackageReference Include="NServiceBus.RabbitMQ" Version="5.1.2" />
+        <PackageReference Include="NServiceBus.Serilog" Version="6.4.0" />
+        <PackageReference Include="NServiceBus.Transport.AzureServiceBus" Version="1.1.2" />
+        <PackageReference Include="NServiceBus.Transport.Msmq" Version="1.0.1" />
+        <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Shared.DataAccess\Shared.DataAccess.csproj" />
+        <ProjectReference Include="..\Shared.Hosting.Abstractions\Shared.Hosting.Abstractions.csproj" />
+    </ItemGroup>
+
+</Project>
