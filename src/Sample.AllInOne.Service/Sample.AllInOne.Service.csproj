@@ -8,13 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200124234055_initial.cs" />
-    <Compile Remove="Migrations\20200124234055_initial.Designer.cs" />
-    <Compile Remove="Migrations\20200124234706_initial.cs" />
-    <Compile Remove="Migrations\20200124234706_initial.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
