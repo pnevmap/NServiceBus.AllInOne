@@ -10,22 +10,23 @@ namespace Shared.DataAccess
 
         public virtual DbContextOptionsSchemaExtension WithDbSchema(string dbSchema)
         {
-            if(string.IsNullOrWhiteSpace(dbSchema))
+            if (string.IsNullOrWhiteSpace(dbSchema))
                 throw new ArgumentNullException(nameof(dbSchema));
 
             DbSchema = dbSchema;
-            
-            return this;
-        }
 
-        public bool ApplyServices(IServiceCollection services)
-        {
-            return false;
+            return this;
         }
 
         public long GetServiceProviderHashCode()
         {
             return 0;
+        }
+
+
+        bool IDbContextOptionsExtension.ApplyServices(IServiceCollection services)
+        {
+            return false;
         }
 
         public void Validate(IDbContextOptions options)

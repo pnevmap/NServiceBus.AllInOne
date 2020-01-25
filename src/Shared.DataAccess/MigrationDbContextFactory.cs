@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -12,16 +13,10 @@ namespace Shared.DataAccess
         private readonly string _connectionString;
         private readonly string _dbSchema;
 
-        /// <summary>
-        /// Creates context factory using default configuration from appsettings file. 
-        /// </summary>
-        /// <param name="migrationsHistoryTable">The migrations table name.</param>
         protected MigrationDbContextFactory(string migrationsHistoryTable = "__EFMigrationsHistory")
         {
-            var configurationRoot = new ConfigurationBuilder().SetBasePath(AppContext.BaseDirectory)
+            var configurationRoot = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("Hosting:Environment")}.json", true)
-                .AddEnvironmentVariables()
                 .Build();
 
             var defaults = Defaults.Read(configurationRoot);
@@ -32,12 +27,6 @@ namespace Shared.DataAccess
             _dbSchema = defaults.DbSchema;
         }
 
-        /// <summary>
-        /// Creates context factory using specified connection string and schema.
-        /// </summary>
-        /// <param name="connectionString">The connection string.</param>
-        /// <param name="dbSchema">The database schema.</param>
-        /// <param name="migrationsHistoryTable">The migrations table name.</param>
         protected MigrationDbContextFactory(string connectionString, string dbSchema = "dbo", string migrationsHistoryTable = "__EFMigrationsHistory")
         {
             _migrationsHistoryTable = migrationsHistoryTable;
@@ -47,29 +36,24 @@ namespace Shared.DataAccess
 
         public TContext CreateDbContext(string[] args)
         {
-            return CreateDbContext(_connectionString, _dbSchema, _migrationsHistoryTable);
-        }
-
-        private static TContext CreateDbContext(string connectionString, string dbSchema, string migrationsHistoryTable)
-        {
-            if (string.IsNullOrEmpty(connectionString))
+            if (string.IsNullOrEmpty(_connectionString))
             {
-                throw new ArgumentNullException(nameof(connectionString));
+                throw new ArgumentNullException(nameof(_connectionString));
             }
 
-            if (string.IsNullOrEmpty(dbSchema))
+            if (string.IsNullOrEmpty(_dbSchema))
             {
-                throw new ArgumentNullException(nameof(dbSchema));
+                throw new ArgumentNullException(nameof(_dbSchema));
             }
 
-            if (string.IsNullOrEmpty(migrationsHistoryTable))
+            if (string.IsNullOrEmpty(_migrationsHistoryTable))
             {
-                throw new ArgumentNullException(nameof(migrationsHistoryTable));
+                throw new ArgumentNullException(nameof(_migrationsHistoryTable));
             }
             
             var dbContextOptions = new DbContextOptionsBuilder<TContext>()
-                .UseSqlServer(connectionString, x => x.MigrationsHistoryTable(migrationsHistoryTable, dbSchema))
-                .UseSqlServerDbSchema(dbSchema)
+                .UseSqlServer(_connectionString, x => x.MigrationsHistoryTable(_migrationsHistoryTable, _dbSchema))
+                .UseSqlServerDbSchema(_dbSchema)
                 .Options;
 
             return Activator.CreateInstance(typeof(TContext), dbContextOptions) as TContext;
