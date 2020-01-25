@@ -16,7 +16,6 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared.DataAccess\Shared.DataAccess.csproj" />
     <ProjectReference Include="..\Shared.Messaging.Bootstrapping\Shared.Messaging.csproj" />
     <ProjectReference Include="..\Shared.Web.Bootstrapping\Shared.Web.Bootstrapping.csproj" />
     <ProjectReference Include="..\Shared.Hosting.Abstractions\Shared.Hosting.Abstractions.csproj" />

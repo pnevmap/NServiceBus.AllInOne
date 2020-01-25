@@ -1,10 +1,13 @@
 ﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using NServiceBus;
 using Sample.AllInOne.Service.Commands;
 using Sample.AllInOne.Service.DataAccess;
 using Shared.DataAccess;
+using Shared.DataAccess.DbConnectionFactories;
 using Shared.Messaging;
 using Shared.Web.Bootstrapping;
 
@@ -43,7 +46,16 @@ namespace Sample.AllInOne.Service
                             .GetResult();
 
             services.AddSingleton<IMessageSession>(instance);
-            services.AddSqlDbContext<ApplicationDataContext>(Defaults);
+
+            services.AddSingleton<IDbConnectionFactory, DefaultDbConnectionFactory>();
+
+            services.AddDbContext<ApplicationDataContext>((sp, o) =>
+            {
+                o.UseSqlServer(sp.GetRequiredService<IDbConnectionFactory>().CreateDbConnection(Defaults.DbConnectionString));
+
+                if (!string.IsNullOrWhiteSpace(Defaults.DbSchema))
+                    o.UseSqlServerDbSchema(Defaults.DbSchema);
+            });
         }
 
         protected override void BuildMvc(IMvcBuilder mvcBuilder)

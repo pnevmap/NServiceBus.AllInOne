@@ -109,11 +109,11 @@ namespace Shared.Messaging
 
             endpointConfig.EnableOutbox();
 
-            var dbConnectionProvider = new DefaultDbConnectionFactory(Log, Configuration);
+            var connectionFactory = new DefaultDbConnectionFactory(Log, Configuration);
 
-            endpointConfig.RegisterComponents(c => c.RegisterSingleton(typeof(IDbConnectionFactory), dbConnectionProvider));
+            endpointConfig.RegisterComponents(c => c.RegisterSingleton(typeof(IDbConnectionFactory), connectionFactory));
 
-            persistence.ConnectionBuilder(() => dbConnectionProvider.CreateDbConnection(Defaults.DbConnectionString));
+            persistence.ConnectionBuilder(() => connectionFactory.CreateDbConnection(Defaults.DbConnectionString));
 
             endpointConfig.Pipeline.Register(
                 new UnitOfWorkSetupBehavior<TDbContext>(Defaults.DbSchema, Log),
