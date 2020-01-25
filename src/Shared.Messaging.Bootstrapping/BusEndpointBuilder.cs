@@ -10,7 +10,7 @@ using NServiceBus.Logging;
 using NServiceBus.Persistence.Sql;
 using NServiceBus.Serilog;
 using Serilog;
-using Shared.DataAccess.DbConnectionFactories;
+using Shared.DataAccess;
 using Shared.Hosting.Abstractions;
 using Shared.Hosting.Abstractions.Logging;
 using Shared.Messaging.Pipeline;

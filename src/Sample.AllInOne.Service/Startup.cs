@@ -7,7 +7,6 @@ using NServiceBus;
 using Sample.AllInOne.Service.Commands;
 using Sample.AllInOne.Service.DataAccess;
 using Shared.DataAccess;
-using Shared.DataAccess.DbConnectionFactories;
 using Shared.Messaging;
 using Shared.Web.Bootstrapping;
 
