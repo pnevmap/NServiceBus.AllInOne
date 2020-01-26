@@ -6,6 +6,11 @@ using Serilog.Events;
 
 namespace Shared.Hosting.Abstractions.Logging
 {
+    public interface ILoggingPolicy
+    {
+        bool IsDefined();
+        void Configure(LoggerConfiguration logConfig, IConfiguration configuration, string applicationName);
+    }
     public class LoggingPolicy : ILoggingPolicy
     {
         public string Section { get; set; }
