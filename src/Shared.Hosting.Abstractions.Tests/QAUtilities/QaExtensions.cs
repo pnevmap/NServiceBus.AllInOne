@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Shared.Hosting.Abstractions.Tests.Logging
+namespace Shared.Hosting.Abstractions.Tests.QAUtilities
 {
     public static class QaExtensions
     {

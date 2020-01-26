@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Shared.Hosting.Abstractions.Tests.Logging
+namespace Shared.Hosting.Abstractions.Tests.QAUtilities
 {
     public class JsonConfigurationParser
     {

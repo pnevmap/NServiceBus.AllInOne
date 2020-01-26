@@ -6,6 +6,7 @@ using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Serilog.Events;
 using Shared.Hosting.Abstractions.Tests.Logging;
+using Shared.Hosting.Abstractions.Tests.QAUtilities;
 
 namespace Shared.Hosting.Abstractions.Tests
 {
