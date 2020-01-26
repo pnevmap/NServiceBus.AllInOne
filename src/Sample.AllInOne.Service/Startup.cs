@@ -43,7 +43,7 @@ namespace Sample.AllInOne.Service
                             .Start()
                             .GetAwaiter()
                             .GetResult();
-
+            
             services.AddSingleton<IMessageSession>(instance);
 
             services.AddSingleton<IDbConnectionFactory, DefaultDbConnectionFactory>();
